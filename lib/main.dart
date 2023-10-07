@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_daily_exercise_app/constants.dart';
+import 'package:flutter_daily_exercise_app/screens/details_screen.dart';
+import 'package:flutter_daily_exercise_app/widgets/search_bar.dart';
 import 'package:flutter_daily_exercise_app/widgets/bottom_nav_bar.dart';
-import 'package:flutter_daily_exercise_app/widgets/bottom_nav_item.dart';
 import 'package:flutter_daily_exercise_app/widgets/category_card.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size; // total h and w of current device
@@ -67,19 +70,7 @@ class HomeScreen extends StatelessWidget {
                           .textTheme
                           .displaySmall
                           ?.copyWith(fontWeight: FontWeight.w900)),
-                  Container(
-                      margin: const EdgeInsets.symmetric(vertical: 30),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 5),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(29.5)),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            hintText: "Search",
-                            icon: SvgPicture.asset("assets/icons/search.svg"),
-                            border: InputBorder.none),
-                      )),
+                  const CustomSearchBar(),
                   Expanded(
                     child: GridView.count(
                       crossAxisCount: 2,
@@ -100,7 +91,12 @@ class HomeScreen extends StatelessWidget {
                         CategoryCard(
                           title: "Meditation",
                           svgSrc: "assets/icons/Meditation.svg",
-                          press: () {},
+                          press: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return DetailsScreen();
+                            }));
+                          },
                         ),
                         CategoryCard(
                           title: "Yoga",
